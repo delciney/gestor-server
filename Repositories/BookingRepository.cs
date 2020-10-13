@@ -58,6 +58,27 @@ namespace BookingCatalog.Repositories
                 .AsNoTracking()
                 .ToList();
         }
+        public IEnumerable<ListBookingViewModel> List(DateTime ReceivedBookingDate, decimal ReceivedStart, decimal ReceivedEnd)
+        {
+            return _context
+                .Bookings
+                .Include(x => x.LivingRoom)
+                .Select(x => new ListBookingViewModel
+                {
+                    Id = x.Id,
+                    Title = x.Title,
+                    BookingDate = x.BookingDate,
+                    Start = x.Start,
+                    End = x.End,
+                    LivingRoom = x.LivingRoom.Title,
+                    LivingRoomId = x.LivingRoom.Id
+                })
+                .Where(d => d.BookingDate == ReceivedBookingDate)
+                .Where(s => s.Start >= ReceivedStart)
+                .Where(e => e.End <= ReceivedEnd)
+                .AsNoTracking()
+                .ToList();
+        }
         public Booking Get(int id)
         {
             return _context.Bookings.Find(id);
