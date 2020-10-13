@@ -17,7 +17,12 @@ namespace BookingCatalog.Controllers
         {
             _repository = repository;
         }
-
+        [Route("/")]
+        [HttpGet]
+        public IEnumerable<ListBookingViewModel> Get()
+        {
+            return "Server on";
+        }
         [Route("v1/Bookings")]
         [HttpGet]
         public IEnumerable<ListBookingViewModel> Get()
