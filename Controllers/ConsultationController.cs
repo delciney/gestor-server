@@ -4,9 +4,11 @@ using Microsoft.AspNetCore.Mvc;
 using BookingCatalog.Models;
 using BookingCatalog.Repositories;
 using BookingCatalog.ViewModels.BookingViewModels;
+using Microsoft.AspNetCore.Cors;
 
 namespace BookingCatalog.Controllers
 {
+    // [EnableCors("MyPolicy")]
     public class ConsultationController : Controller
     {
         private readonly BookingRepository _repository;

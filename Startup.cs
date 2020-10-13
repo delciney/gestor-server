@@ -9,8 +9,11 @@ namespace ProductCatalog
 {
     public class Startup
     {
+
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddCors();
             services.AddMvc();
             services.AddResponseCompression();
 
@@ -22,6 +25,14 @@ namespace ProductCatalog
         {
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
+
+
+            app.UseCors(
+                options => options.AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+            );
+
 
             app.UseMvc();
             app.UseResponseCompression();

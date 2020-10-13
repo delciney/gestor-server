@@ -4,9 +4,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BookingCatalog.Data;
 using BookingCatalog.Models;
+using Microsoft.AspNetCore.Cors;
 
 namespace BookingCatalog.Controllers
 {
+    // [EnableCors("MyPolicy")]
     public class CategoryController : Controller
     {
         private readonly StoreDataContext _context;
@@ -18,7 +20,6 @@ namespace BookingCatalog.Controllers
 
         [Route("v1/LivingRooms")]
         [HttpGet]
-        [ResponseCache(Duration = 3600)]
         public IEnumerable<LivingRoom> Get()
         {
             return _context.LivingRooms.AsNoTracking().ToList();
